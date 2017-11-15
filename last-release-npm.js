@@ -8,31 +8,29 @@ const SemanticReleaseError = require('@semantic-release/error');
 const npmlog = require('npmlog');
 const execa = require('execa');
 
+async function getData(name, tag) {
+	const res = await execa('npm', [
+		'info',
+		'--json',
+		`${name}@${tag || 'latest'}`,
+		'dist-tags',
+		'version',
+		'gitHead'
+	]);
+	return JSON.parse(res.stdout);
+}
+
 module.exports = async function({ retry } = {}, { pkg, npm, options }, cb) {
 	npmlog.level = npm.loglevel || 'warn';
 
 	try {
-		const res = await execa('npm', [
-			'info',
-			'--json',
-			`${pkg.name}@*`,
-			'dist-tags',
-			'version',
-			'gitHead'
-		]);
-		const allData = JSON.parse(res.stdout) || [];
-		const versions = allData.reduce(
-			(agg, info) => Object.assign(agg, { [info.version]: info }),
-			{}
-		);
-		const data = allData[0] || {};
-
+		let data = await getData(pkg.name, npm.tag);
 		if (data && !data['dist-tags']) {
 			return cb(null, {});
 		}
 		const distTags = data['dist-tags'];
-		let version = distTags[npm.tag];
 
+		let version = distTags[npm.tag];
 		if (
 			!version &&
 			options &&
@@ -41,6 +39,7 @@ module.exports = async function({ retry } = {}, { pkg, npm, options }, cb) {
 			distTags[options.fallbackTags[npm.tag]]
 		) {
 			version = distTags[options.fallbackTags[npm.tag]];
+			data = await getData(pkg.name, version);
 		}
 
 		if (!version) {
@@ -54,7 +53,7 @@ module.exports = async function({ retry } = {}, { pkg, npm, options }, cb) {
 
 		cb(null, {
 			version,
-			gitHead: versions[version].gitHead,
+			gitHead: data.gitHead,
 			get tag() {
 				npmlog.warn('deprecated', 'tag will be removed with the next major release');
 				return npm.tag;
