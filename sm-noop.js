@@ -1,1 +1,4 @@
-module.exports = require('./dist/release/sm-noop.js');
+// semantic-release noop
+module.exports = function(pluginConfig, config, cb) {
+	cb(null);
+};
