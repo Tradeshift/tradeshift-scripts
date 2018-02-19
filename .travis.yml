@@ -12,3 +12,4 @@ after_success: node src travis-after-success
 branches:
   only:
     - master
+    - /^greenkeeper/.*$/
