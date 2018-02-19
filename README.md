@@ -17,6 +17,8 @@
 
 ## The problem
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/wejendorp/tradeshift-scripts.svg)](https://greenkeeper.io/)
+
 Creating new tradeshift npm libraries requires a lot of boilerplate configuration,
 and is prone to errors. Configurations will often diverge or never be updated.
 
