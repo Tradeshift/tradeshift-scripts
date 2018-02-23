@@ -48,7 +48,7 @@
 		"eslint-config-tradeshift": "*",
 		"eslint-plugin-import": "2.8.0",
 		"eslint-plugin-jest": "^21.2.0",
-		"eslint-plugin-node": "6.0.0",
+		"eslint-plugin-node": "6.0.1",
 		"eslint-plugin-promise": "3.6.0",
 		"eslint-plugin-react": "^7.4.0",
 		"eslint-plugin-standard": "3.0.1",
