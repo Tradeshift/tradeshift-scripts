@@ -55,7 +55,7 @@
 		"execa": "^0.9.0",
 		"glob": "^7.1.2",
 		"husky": "^0.14.3",
-		"jest": "^22.3.0",
+		"jest": "^23.0.0",
 		"lint-staged": "^7.1.2",
 		"lodash.camelcase": "^4.3.0",
 		"lodash.has": "^4.5.2",
