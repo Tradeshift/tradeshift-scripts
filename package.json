@@ -26,7 +26,7 @@
 		"@semantic-release/error": "^2.0.0",
 		"arrify": "^1.0.1",
 		"babel-cli": "^6.26.0",
-		"babel-jest": "^22.2.2",
+		"babel-jest": "^23.0.0",
 		"babel-plugin-external-helpers": "^6.22.0",
 		"babel-plugin-macros": "^2.2.1",
 		"babel-plugin-minify-dead-code-elimination": "^0.4.3",
