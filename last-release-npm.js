@@ -45,7 +45,9 @@ module.exports = async function({ retry } = {}, { pkg, npm, options }, cb) {
 		if (!version) {
 			return cb(
 				new SemanticReleaseError(
-					`There is no release with the dist-tag "${npm.tag}" yet. Tag a version manually or define "fallbackTags".`,
+					`There is no release with the dist-tag "${
+						npm.tag
+					}" yet. Tag a version manually or define "fallbackTags".`,
 					'ENODISTTAG'
 				)
 			);
@@ -60,10 +62,10 @@ module.exports = async function({ retry } = {}, { pkg, npm, options }, cb) {
 			}
 		});
 	} catch (err) {
-		console.log(err);
 		if (err.statusCode === 404 || /not found/i.test(err.message)) {
 			return cb(null, {});
 		}
+		console.log(err);
 		return cb(err);
 	}
 };
