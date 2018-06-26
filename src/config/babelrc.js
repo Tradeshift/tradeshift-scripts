@@ -11,7 +11,9 @@ const alias = parseEnv('BUILD_ALIAS', isPreact ? { react: 'preact' } : null);
 const envModules = treeshake ? { modules: false } : {};
 const envTargets = isTest
 	? { node: 'current' }
-	: isWebpack || isRollup ? { browsers: ['ie 10', 'ios 7'] } : { node: '4.5' };
+	: isWebpack || isRollup
+		? { browsers: ['ie 10', 'ios 7'] }
+		: { node: '4.5' };
 const envOptions = Object.assign({}, envModules, { targets: envTargets });
 
 module.exports = {
@@ -32,6 +34,7 @@ module.exports = {
 		isUMD ? require.resolve('babel-plugin-transform-inline-environment-variables') : null,
 		require.resolve('babel-plugin-transform-class-properties'),
 		require.resolve('babel-plugin-transform-object-rest-spread'),
-		require.resolve('babel-plugin-minify-dead-code-elimination')
+		require.resolve('babel-plugin-minify-dead-code-elimination'),
+		require.resolve('babel-plugin-transform-es2015-shorthand-properties')
 	].filter(Boolean)
 };
