@@ -54,18 +54,19 @@ const filename = [pkg.name, filenameSuffix, `.${format}`, minify ? '.min' : null
 
 const filepath = path.join(...[filenamePrefix, 'dist', filename].filter(Boolean));
 
-const output = [{ file: filepath, format: esm ? 'es' : format }];
-
 const useBuiltinConfig = !hasFile('.babelrc') && !hasPkgProp('babel');
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : [];
 
 module.exports = {
 	input,
-	output,
-	exports: esm ? 'named' : 'default',
-	name,
+	output: {
+		name,
+		file: filepath,
+		format: esm ? 'es' : format,
+		exports: esm ? 'named' : 'default',
+		globals
+	},
 	external,
-	globals,
 	plugins: [
 		isNode ? nodeBuiltIns() : null,
 		isNode ? nodeGlobals() : null,
