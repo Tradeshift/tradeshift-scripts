@@ -77,6 +77,6 @@ module.exports = {
 			presets: babelPresets,
 			babelrc: true
 		}),
-		minify ? uglify() : null
+		minify ? uglify.uglify() : null
 	].filter(Boolean)
 };
