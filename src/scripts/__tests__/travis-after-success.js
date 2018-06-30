@@ -11,6 +11,8 @@ cases(
 	({ version = '0.0.0-semantically-released', hasCoverageDir = true, branch = 'master' }) => {
 		// beforeEach
 		const { sync: crossSpawnSyncMock } = require('cross-spawn');
+		const envCiMock = require('env-ci');
+
 		const utils = require('../../utils');
 		utils.resolveBin = (modName, { executable = modName } = {}) => executable;
 		const originalExit = process.exit;
@@ -18,21 +20,15 @@ cases(
 
 		// tests
 		crossSpawnSyncMock.mockClear();
-		crossSpawnSyncMock.mockReturnValue({
-			stdout: {
-				toString() {
-					return branch;
-				}
-			}
-		});
+		envCiMock.mockReturnValue({ branch });
 		if (version) {
 			utils.pkg.version = version;
 		}
 		utils.hasFile = filename => filename === 'coverage' && hasCoverageDir;
 		require('../travis-after-success');
-		expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2);
-		const [, secondCall] = crossSpawnSyncMock.mock.calls;
-		const [script, calledArgs] = secondCall;
+		expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1);
+		const [firstCall] = crossSpawnSyncMock.mock.calls;
+		const [script, calledArgs] = firstCall;
 		expect([script, ...calledArgs].join(' ')).toMatchSnapshot();
 
 		// afterEach
