@@ -8,7 +8,7 @@ expect.addSnapshotSerializer({
 
 cases(
 	'travis-after-success',
-	({ version = '0.0.0-semantically-released', hasCoverageDir = true }) => {
+	({ version = '0.0.0-semantically-released', hasCoverageDir = true, branch = 'master' }) => {
 		// beforeEach
 		const { sync: crossSpawnSyncMock } = require('cross-spawn');
 		const utils = require('../../utils');
@@ -18,14 +18,21 @@ cases(
 
 		// tests
 		crossSpawnSyncMock.mockClear();
+		crossSpawnSyncMock.mockReturnValue({
+			stdout: {
+				toString() {
+					return branch;
+				}
+			}
+		});
 		if (version) {
 			utils.pkg.version = version;
 		}
-		utils.hasFile = () => hasCoverageDir;
+		utils.hasFile = filename => filename === 'coverage' && hasCoverageDir;
 		require('../travis-after-success');
-		expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1);
-		const [firstCall] = crossSpawnSyncMock.mock.calls;
-		const [script, calledArgs] = firstCall;
+		expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2);
+		const [, secondCall] = crossSpawnSyncMock.mock.calls;
+		const [script, calledArgs] = secondCall;
 		expect([script, ...calledArgs].join(' ')).toMatchSnapshot();
 
 		// afterEach
@@ -39,6 +46,9 @@ cases(
 		},
 		'does not do the codecov script when there is no coverage directory': {
 			hasCoverageDir: false
+		},
+		'adds dry-run flag when not running on master': {
+			branch: 'dev-branch'
 		}
 	}
 );
