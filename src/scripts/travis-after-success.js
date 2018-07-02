@@ -10,7 +10,9 @@ const releaseBranch = releaseConfig.branch || 'master';
 const { branch } = envCi();
 // Run a dry-run release when not on master
 const dryRun = branch !== releaseBranch;
-const releaseFlags = ['--no-ci', dryRun ? '--dry-run' : ''].filter(Boolean).join(' ');
+const releaseFlags = ['--no-ci', dryRun ? '--dry-run' : '', dryRun ? `--branch ${branch}` : '']
+	.filter(Boolean)
+	.join(' ');
 
 const result = spawn.sync(
 	resolveBin('concurrently'),

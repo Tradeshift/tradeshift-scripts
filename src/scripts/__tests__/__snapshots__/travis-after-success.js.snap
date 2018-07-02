@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`travis-after-success adds dry-run flag when not running on master 1`] = `concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release dry run && semantic-release --no-ci --dry-run'"`;
+exports[`travis-after-success adds dry-run flag when not running on master 1`] = `concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release dry run && semantic-release --no-ci --dry-run --branch dev-branch'"`;
 
 exports[`travis-after-success calls concurrently with both scripts 1`] = `concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release  && semantic-release --no-ci'"`;
 
