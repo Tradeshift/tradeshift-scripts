@@ -1,6 +1,7 @@
 node_modules
 coverage
 dist
+build
 .vscode
 .opt-in
 .opt-out
