@@ -56,7 +56,7 @@
 		"eslint-config-tradeshift": "^5.0.0",
 		"eslint-plugin-jest": "^21.17.0",
 		"eslint-plugin-react": "^7.10.0",
-		"execa": "^0.10.0",
+		"execa": "^0.11.0",
 		"glob": "^7.1.2",
 		"husky": "^0.14.3",
 		"jest": "^23.0.0",
