@@ -30,6 +30,7 @@ const envOptions = { modules: false, loose: true, targets: envTargets };
 module.exports = () => ({
 	presets: [
 		[require.resolve('@babel/preset-env'), envOptions],
+        require.resolve('@babel/preset-typescript'),
 		ifAnyDep(
 			['react', 'preact'],
 			[require.resolve('@babel/preset-react'), { pragma: isPreact ? 'React.h' : undefined }]
