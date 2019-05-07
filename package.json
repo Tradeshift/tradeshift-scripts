@@ -1,6 +1,6 @@
 {
 	"name": "tradeshift-scripts",
-	"version": "0.0.0-semantically-released",
+	"version": "0.0.0-testing",
 	"description": "CLI for common scripts for my projects",
 	"engines": {
 		"node": ">= 8",
@@ -53,7 +53,7 @@
 		"env-ci": "^2.1.1",
 		"eslint": "^4.7.2",
 		"eslint-config-tradeshift": "^5.0.0",
-		"eslint-plugin-jest": "^21.17.0",
+		"eslint-plugin-jest": "^22.5.1",
 		"eslint-plugin-react": "^7.10.0",
 		"execa": "^0.10.0",
 		"glob": "^7.1.2",
