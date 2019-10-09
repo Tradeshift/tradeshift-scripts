@@ -30,7 +30,7 @@ Available Scripts:
   build
   format
   lint
-  precommit
+  pre-commit
   test
   travis-after-success
   validate

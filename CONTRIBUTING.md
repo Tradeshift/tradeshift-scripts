@@ -2,15 +2,15 @@
 
 Thanks for being willing to contribute!
 
-**Working on your first Pull Request?** You can learn how from this *free* series
+**Working on your first Pull Request?** You can learn how from this _free_ series
 [How to Contribute to an Open Source Project on GitHub][egghead]
 
 ## Project setup
 
-1. Fork and clone the repo
-2. `$ npm install` to install dependencies
-3. `$ npm run validate` to validate you've got it working
-4. Create a branch for your PR
+1.  Fork and clone the repo
+2.  `$ npm install` to install dependencies
+3.  `$ npm run validate` to validate you've got it working
+4.  Create a branch for your PR
 
 > Tip: Keep your `master` branch pointing at the original repository and make
 > pull requests from branches on your fork. To do this, run:
@@ -40,7 +40,7 @@ Please make sure to run the tests before you commit your changes. You can run
 `npm run test:update` which will update any snapshots that need updating.
 Make sure to include those changes (if they exist) in your commit.
 
-### opt into git hooks
+### opt in/out of git hooks
 
 There are git hooks set up with this project that are automatically installed
 when you install dependencies. They're really handy, but are turned off by
@@ -50,6 +50,16 @@ inside:
 
 ```
 pre-commit
+```
+
+One of the things that the git hooks does is automatically format the files you
+change. It does this by reformating the entire file and running `git add` on
+the file after. This breaks workflows where you're trying to commit portions of
+the file only. You can always run your commit with `--no-verify`, but if this
+is a bummer to your workflow, you can add an `.opt-out` file with the contents:
+
+```
+autoformat
 ```
 
 ## Help needed

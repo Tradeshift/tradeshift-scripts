@@ -1,13 +1,10 @@
 node_modules
 coverage
 dist
-/build
-.vscode
 .opt-in
 .opt-out
 .DS_Store
 .eslintcache
-.idea
 
 # these cause more harm than good
 # when working with contributors
