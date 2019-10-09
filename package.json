@@ -7,7 +7,7 @@
     "npm": ">= 5"
   },
   "bin": {
-    "kcd-scripts": "dist/index.js"
+    "tradeshift-scripts": "dist/index.js"
   },
   "scripts": {
     "test": "node src test",
@@ -58,8 +58,7 @@
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
     "eslint": "^6.1.0",
-    "eslint-config-kentcdodds": "^14.3.4",
-    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-tradeshift": "^6.1.0",
     "glob": "^7.1.4",
     "husky": "^3.0.3",
     "is-ci": "^2.0.0",
@@ -90,17 +89,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "kentcdodds",
-      "kentcdodds/jest"
-    ],
-    "rules": {
-      "no-process-exit": "off",
-      "import/no-dynamic-require": "off",
-      "import/no-unassigned-import": "off",
-      "no-console": "off",
-      "no-nested-ternary": "off",
-      "no-useless-catch": "off"
-    }
+      "./src/config/eslintrc"
+    ]
   },
   "eslintIgnore": [
     "node_modules",
@@ -116,6 +106,9 @@
   },
   "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
   "devDependencies": {
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-react": "^7.16.0",
     "jest-in-case": "^1.0.2",
     "slash": "^3.0.0"
   }

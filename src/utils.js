@@ -7,6 +7,7 @@ const has = require('lodash.has');
 const readPkgUp = require('read-pkg-up');
 const which = require('which');
 const cosmiconfig = require('cosmiconfig');
+const scriptsPkgName = require('../package.json').name;
 
 const { package: pkg, path: pkgPath } = readPkgUp.sync({
 	cwd: fs.realpathSync(process.cwd())
@@ -14,10 +15,10 @@ const { package: pkg, path: pkgPath } = readPkgUp.sync({
 const appDirectory = path.dirname(pkgPath);
 
 function resolveKcdScripts() {
-	if (pkg.name === 'kcd-scripts') {
+	if (pkg.name === scriptsPkgName) {
 		return require.resolve('./').replace(process.cwd(), '.');
 	}
-	return resolveBin('kcd-scripts');
+	return resolveBin(scriptsPkgName);
 }
 
 // eslint-disable-next-line complexity
