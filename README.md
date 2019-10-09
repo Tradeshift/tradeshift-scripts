@@ -103,15 +103,15 @@ Or, for `babel`, a `.babelrc` with:
 Or, for `jest`:
 
 ```javascript
-const {jest: jestConfig} = require('kcd-scripts/config')
+const { jest: jestConfig } = require('kcd-scripts/config');
 module.exports = Object.assign(jestConfig, {
-  // your overrides here
+	// your overrides here
 
-  // for test written in Typescript, add:
-  transform: {
-    '\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest/preprocessor.js',
-  },
-})
+	// for test written in Typescript, add:
+	transform: {
+		'\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest/preprocessor.js'
+	}
+});
 ```
 
 > Note: `kcd-scripts` intentionally does not merge things for you when you start
