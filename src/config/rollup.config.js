@@ -56,6 +56,7 @@ const filepath = path.join(...[filenamePrefix, 'dist', filename].filter(Boolean)
 
 const useBuiltinConfig = !hasFile('.babelrc') && !hasFile('.babelrc.js') && !hasPkgProp('babel');
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : [];
+const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'];
 
 module.exports = {
 	input,
@@ -70,7 +71,12 @@ module.exports = {
 	plugins: [
 		isNode ? nodeBuiltIns() : null,
 		isNode ? nodeGlobals() : null,
-		nodeResolve({ preferBuiltins: isNode, jsnext: true, main: true }),
+		nodeResolve({
+			preferBuiltins: isNode,
+			jsnext: true,
+			main: true,
+			extensions: [...extensions, '.json']
+		}),
 		commonjs({ include: 'node_modules/**' }),
 		json(),
 		rollupBabel({

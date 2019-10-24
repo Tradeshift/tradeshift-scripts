@@ -18,9 +18,10 @@ const useBuiltinConfig =
 	!hasPkgProp('babel');
 const config = useBuiltinConfig ? ['--presets', here('../../config/babelrc.js')] : [];
 
-const builtInIgnore = '**/__tests__/**,**/__mocks__/**';
-
+const builtInIgnore = '__tests__,__mocks__,**/*.spec.js,**/*.spec.ts';
 const ignore = args.includes('--ignore') ? [] : ['--ignore', builtInIgnore];
+
+const extensions = args.includes('--extensions') ? [] : ['--extensions', '.js,.jsx,.ts,.tsx'];
 
 const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files'];
 
@@ -34,7 +35,7 @@ if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
 
 const result = spawn.sync(
 	resolveBin('@babel/cli', { executable: 'babel' }),
-	[...outDir, ...copyFiles, ...ignore, ...config, 'src'].concat(args),
+	[...outDir, ...copyFiles, ...extensions, ...ignore, ...config, 'src'].concat(args),
 	{ stdio: 'inherit' }
 );
 

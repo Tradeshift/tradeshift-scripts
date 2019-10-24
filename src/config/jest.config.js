@@ -15,10 +15,10 @@ const ignores = ['/node_modules/', '/fixtures/', '/__tests__/helpers/', '__mocks
 const jestConfig = {
 	roots: [fromRoot('src')],
 	testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
-	collectCoverageFrom: ['src/**/*.js'],
-	testMatch: ['**/__tests__/**/*.js', '**/*.spec.js'],
+	collectCoverageFrom: ['src/**/*.[jt]s?(x)'],
+	testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+spec.[jt]s?(x)'],
 	testPathIgnorePatterns: [...ignores],
-	coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.js$'],
+	coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.[jt]s$'],
 	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
 	reporters: ['default', [require.resolve('jest-junit'), junitConfig]],
 	coverageThreshold: {
@@ -32,7 +32,7 @@ const jestConfig = {
 };
 
 if (useBuiltInBabelConfig) {
-	jestConfig.transform = { '^.+\\.js$': here('./babel-transform') };
+	jestConfig.transform = { '^.+\\.[jt]s$': here('./babel-transform') };
 }
 
 module.exports = jestConfig;
