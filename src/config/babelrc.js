@@ -1,6 +1,7 @@
 const browserslist = require('browserslist');
+const semver = require('semver');
 
-const { ifAnyDep, parseEnv, appDirectory } = require('../utils');
+const { ifAnyDep, parseEnv, appDirectory, pkg } = require('../utils');
 
 const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test';
 const isPreact = parseEnv('BUILD_PREACT', false);
@@ -24,7 +25,7 @@ const envTargets = isTest
 	? { node: 'current' }
 	: isWebpack || isRollup
 	? { browsers: browsersConfig }
-	: { node: '6' };
+	: { node: getNodeVersion(pkg) };
 const envOptions = { modules: false, loose: true, targets: envTargets };
 
 module.exports = () => ({
@@ -51,3 +52,18 @@ module.exports = () => ({
 		isTest ? require.resolve('babel-plugin-dynamic-import-node') : null
 	].filter(Boolean)
 });
+
+function getNodeVersion({ engines: { node: nodeVersion = '8' } = {} }) {
+	const oldestVersion = semver
+		.validRange(nodeVersion)
+		.replace(/[>=<|]/g, ' ')
+		.split(' ')
+		.filter(Boolean)
+		.sort(semver.compare)[0];
+	if (!oldestVersion) {
+		throw new Error(
+			`Unable to determine the oldest version in the range in your package.json at engines.node: "${nodeVersion}". Please attempt to make it less ambiguous.`
+		);
+	}
+	return oldestVersion;
+}
