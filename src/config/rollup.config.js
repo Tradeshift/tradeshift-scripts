@@ -54,7 +54,7 @@ const filename = [pkg.name, filenameSuffix, `.${format}`, minify ? '.min' : null
 
 const filepath = path.join(...[filenamePrefix, 'dist', filename].filter(Boolean));
 
-const useBuiltinConfig = !hasFile('.babelrc') && !hasPkgProp('babel');
+const useBuiltinConfig = !hasFile('.babelrc') && !hasFile('.babelrc.js') && !hasPkgProp('babel');
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : [];
 
 module.exports = {
@@ -76,7 +76,8 @@ module.exports = {
 		rollupBabel({
 			exclude: 'node_modules/**',
 			presets: babelPresets,
-			babelrc: true
+			babelrc: !useBuiltinConfig,
+			runtimeHelpers: useBuiltinConfig
 		}),
 		minify ? uglify.uglify() : null
 	].filter(Boolean)
