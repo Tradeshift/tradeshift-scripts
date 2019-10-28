@@ -5,7 +5,7 @@ const has = require('lodash.has');
 const readPkgUp = require('read-pkg-up');
 const which = require('which');
 
-const { pkg, path: pkgPath } = readPkgUp.sync({
+const { packageJson: pkg, path: pkgPath } = readPkgUp.sync({
 	cwd: fs.realpathSync(process.cwd())
 });
 const appDirectory = path.dirname(pkgPath);
