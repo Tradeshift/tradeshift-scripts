@@ -58,6 +58,7 @@ module.exports = () => ({
 		[require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
 		require.resolve('babel-plugin-minify-dead-code-elimination'),
 		require.resolve('@babel/plugin-proposal-object-rest-spread'),
+		require.resolve('@babel/plugin-proposal-optional-chaining'),
 		treeshake ? null : require.resolve('@babel/plugin-transform-modules-commonjs'),
 		// transpile dynamic imports to require in jest:
 		isTest ? require.resolve('babel-plugin-dynamic-import-node') : null
