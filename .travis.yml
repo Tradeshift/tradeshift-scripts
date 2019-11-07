@@ -9,8 +9,11 @@ node_js:
   - '8'
   - '10'
   - '12'
-script: npm run validate
-after_success: node src travis-after-success
-branches:
-  only:
-    - master
+jobs:
+  include:
+    - stage: test
+      script: npm run validate
+    - stage: deploy
+      node_js: 12
+      script: node src travis-after-success
+      if: branch = master AND type = push
