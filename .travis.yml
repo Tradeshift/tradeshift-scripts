@@ -9,10 +9,9 @@ node_js:
   - '8'
   - '10'
   - '12'
+script: npm run validate
 jobs:
   include:
-    - stage: test
-      script: npm run validate
     - stage: deploy
       node_js: 12
       script: node src travis-after-success
