@@ -40,8 +40,6 @@ cases(
 			const [firstCall] = crossSpawnSyncMock.mock.calls;
 			const [script, calledArgs] = firstCall;
 			expect([script, ...calledArgs].join(' ')).toMatchSnapshot();
-		} catch (error) {
-			throw error;
 		} finally {
 			teardown();
 			// afterEach

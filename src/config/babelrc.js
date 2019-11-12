@@ -10,7 +10,8 @@ const isRollup = parseEnv('BUILD_ROLLUP', false);
 const isUMD = BUILD_FORMAT === 'umd';
 const isCJS = BUILD_FORMAT === 'cjs';
 const isWebpack = parseEnv('BUILD_WEBPACK', false);
-const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack);
+const isESM = parseEnv('BUILD_ESM', false);
+const treeshake = parseEnv('BUILD_TREESHAKE', isESM || isRollup || isWebpack);
 const alias = parseEnv('BUILD_ALIAS', isPreact ? { react: 'preact' } : null);
 
 const hasBabelRuntimeDep = Boolean(pkg.dependencies && pkg.dependencies['@babel/runtime']);
@@ -44,7 +45,8 @@ module.exports = () => ({
 		ifAnyDep(
 			['react', 'preact'],
 			[require.resolve('@babel/preset-react'), { pragma: isPreact ? 'React.h' : undefined }]
-		)
+		),
+		ifAnyDep(['typescript'], require.resolve('@babel/preset-typescript'))
 	].filter(Boolean),
 	plugins: [
 		[require.resolve('@babel/plugin-transform-runtime'), { useESModules: treeshake && !isCJS }],

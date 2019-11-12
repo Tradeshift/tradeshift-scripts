@@ -44,8 +44,6 @@ cases(
 			const [firstCall] = jestRunMock.mock.calls;
 			const [jestArgs] = firstCall;
 			expect(jestArgs.join(' ')).toMatchSnapshot();
-		} catch (error) {
-			throw error;
 		} finally {
 			teardown();
 			// afterEach
