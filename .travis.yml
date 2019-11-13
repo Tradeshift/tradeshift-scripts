@@ -14,5 +14,5 @@ jobs:
   include:
     - stage: deploy
       node_js: 12
-      script: node src travis-after-success
+      script: node src build && node src travis-after-success
       if: branch = master AND type = push
