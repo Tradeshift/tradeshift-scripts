@@ -16,7 +16,7 @@ const jestConfig = {
 	roots: [fromRoot('src')],
 	testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
 	collectCoverageFrom: ['src/**/*.[jt]s?(x)'],
-	testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+spec.[jt]s?(x)'],
+	testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)spec.[jt]s?(x)'],
 	testPathIgnorePatterns: [...ignores],
 	coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.[jt]s$'],
 	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
