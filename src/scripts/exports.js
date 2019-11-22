@@ -9,22 +9,22 @@ const config = JSON.parse(fs.readFileSync(path.join(currentDir, configFile)).toS
 const clean = () =>
 	Object.keys(config.exports).forEach(alias => {
 		const aliasFile = path.join(currentDir, alias);
-		fs.existsSync(aliasFile) && fs.unlinkSync(aliasFile);
+		fs.existsSync(aliasFile)
+			? fs.unlinkSync(aliasFile)
+			: fs.existsSync(`${aliasFile}.js`) && fs.unlinkSync(`${aliasFile}.js`);
 	});
 
 const linkExports = () => {
 	Object.keys(config.exports).forEach(alias => {
-		const aliasFile = path.join(currentDir, alias);
-
 		try {
 			require.resolve(config.exports[alias], { paths: [currentDir] });
 			fs.writeFileSync(
-				path.join(aliasFile),
+				path.join(currentDir, `${path.basename(alias, '.js')}.js`),
 				`module.exports = require('${config.exports[alias]}');`
 			);
 		} catch (e) {
 			console.error(
-				`Error: Cannot alias '${alias}' target '${config.exports[alias]}' from '${configFile}' exports\n`
+				`Error: Cannot find target '${config.exports[alias]}' for alias '${alias}' from '${configFile}' exports\n`
 			);
 			process.exitCode = 1;
 		}
