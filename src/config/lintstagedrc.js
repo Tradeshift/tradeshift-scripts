@@ -6,7 +6,7 @@ const doctoc = resolveBin('doctoc');
 module.exports = {
 	concurrent: false,
 	linters: {
-		'**/*.+(js|json|less|css|ts)': [
+		'**/*.+(js|jsx|json|less|css|ts|tsx)': [
 			`${kcdScripts} format`,
 			`${kcdScripts} lint`,
 			`${kcdScripts} test --findRelatedTests`,

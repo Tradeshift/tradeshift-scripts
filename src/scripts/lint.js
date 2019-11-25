@@ -22,7 +22,7 @@ const useBuiltinIgnore =
 const ignore = useBuiltinIgnore ? ['--ignore-path', hereRelative('../config/eslintignore')] : [];
 
 const cache = args.includes('--no-cache') ? [] : ['--cache'];
-const extensions = args.includes('--ext') ? [] : ['--ext', '.js,.ts'];
+const extensions = args.includes('--ext') ? [] : ['--ext', '.js,.jsx,.ts,.tsx'];
 
 const filesGiven = parsedArgs._.length > 0;
 
