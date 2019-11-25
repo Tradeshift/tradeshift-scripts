@@ -32,7 +32,14 @@ if (filesGiven) {
 	// we need to take all the flag-less arguments (the files that should be linted)
 	// and filter out the ones that aren't js files. Otherwise json or css files
 	// may be passed through
-	args = args.filter(a => !parsedArgs._.includes(a) || a.endsWith('.js') || a.endsWith('.ts'));
+	args = args.filter(
+		a =>
+			!parsedArgs._.includes(a) ||
+			a.endsWith('.js') ||
+			a.endsWith('.jsx') ||
+			a.endsWith('.ts') ||
+			a.endsWith('.tsx')
+	);
 }
 
 const result = spawn.sync(
