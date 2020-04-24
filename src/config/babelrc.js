@@ -18,7 +18,7 @@ const hasBabelRuntimeDep = Boolean(pkg.dependencies && pkg.dependencies['@babel/
 const RUNTIME_HELPERS_WARN =
 	'You should add @babel/runtime as dependency to your package. It will allow reusing so-called babel helpers from npm rather than bundling their copies into your files.';
 
-if (!isUMD && !hasBabelRuntimeDep) {
+if (!isUMD && !hasBabelRuntimeDep && !isTest) {
 	console.warn(RUNTIME_HELPERS_WARN);
 }
 
@@ -29,7 +29,7 @@ if (!isUMD && !hasBabelRuntimeDep) {
  */
 const browsersConfig = browserslist.loadConfig({ path: appDirectory }) || [
 	'ie 11',
-	'last 2 versions'
+	'last 2 versions',
 ];
 
 const envTargets = isTest
@@ -46,7 +46,7 @@ module.exports = () => ({
 			['react', 'preact'],
 			[require.resolve('@babel/preset-react'), { pragma: isPreact ? 'React.h' : undefined }]
 		),
-		ifAnyDep(['typescript'], require.resolve('@babel/preset-typescript'))
+		ifAnyDep(['typescript'], require.resolve('@babel/preset-typescript')),
 	].filter(Boolean),
 	plugins: [
 		[require.resolve('@babel/plugin-transform-runtime'), { useESModules: treeshake && !isCJS }],
@@ -54,7 +54,7 @@ module.exports = () => ({
 		alias ? [require.resolve('babel-plugin-module-resolver'), { root: ['./src'], alias }] : null,
 		[
 			require.resolve('babel-plugin-transform-react-remove-prop-types'),
-			isPreact ? { removeImport: true } : { mode: 'unsafe-wrap' }
+			isPreact ? { removeImport: true } : { mode: 'unsafe-wrap' },
 		],
 		isUMD ? require.resolve('babel-plugin-transform-inline-environment-variables') : null,
 		[require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
@@ -64,8 +64,8 @@ module.exports = () => ({
 		require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
 		treeshake ? null : require.resolve('@babel/plugin-transform-modules-commonjs'),
 		// transpile dynamic imports to require in jest:
-		isTest ? require.resolve('babel-plugin-dynamic-import-node') : null
-	].filter(Boolean)
+		isTest ? require.resolve('babel-plugin-dynamic-import-node') : null,
+	].filter(Boolean),
 });
 
 function getNodeVersion({ engines: { node: nodeVersion = '8' } = {} }) {
