@@ -1,35 +1,65 @@
-const envCi = require('env-ci');
 const spawn = require('cross-spawn');
-const { resolveBin, getConcurrentlyArgs, hasFile, fromRoot, pkg } = require('../utils');
+const {
+	resolveBin,
+	getConcurrentlyArgs,
+	hasFile,
+	pkg,
+	parseEnv,
+} = require('../utils');
 
-const autorelease = pkg.version === '0.0.0-semantically-released';
+const releaseBranches = ['master', 'next', 'next-major', 'beta', 'alpha'];
 
-// We don't care about the TravisCI validation
-const releaseConfig = hasFile('release.config.js') ? require(fromRoot('release.config.js')) : {};
-const releaseBranch = releaseConfig.branch || 'master';
-const { branch } = envCi();
-// Run a dry-run release when not on master
-const dryRun = branch !== releaseBranch;
-const releaseFlags = ['--no-ci', dryRun ? '--dry-run' : '', dryRun ? `--branch ${branch}` : '']
-	.filter(Boolean)
-	.join(' ');
+const autorelease =
+	pkg.version === '0.0.0-semantically-released' &&
+	parseEnv('TRAVIS', false) &&
+	releaseBranches.includes(process.env.TRAVIS_BRANCH) &&
+	!parseEnv('TRAVIS_PULL_REQUEST', false);
 
-const result = spawn.sync(
-	resolveBin('concurrently'),
-	getConcurrentlyArgs(
-		{
-			codecov: hasFile('coverage')
-				? "echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'"
-				: null,
-			release: autorelease
-				? `echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release ${
-						dryRun ? 'dry run' : ''
-				  } && semantic-release ${releaseFlags}'`
-				: null
-		},
-		{ killOthers: false }
-	),
-	{ stdio: 'inherit' }
-);
+if (autorelease) {
+	// we only need deploy once for releases
+	console.log('installing and running travis-deploy-once');
+	const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'], {
+		stdio: 'inherit',
+	});
+	if (deployOnceResults.status === 0) {
+		runAfterSuccessScripts();
+	} else {
+		console.log(
+			'travis-deploy-once exited with a non-zero exit code',
+			deployOnceResults.status,
+		);
+		process.exit(deployOnceResults.status);
+	}
+} else {
+	runAfterSuccessScripts();
+}
 
-process.exit(result.status);
+// eslint-disable-next-line complexity
+function runAfterSuccessScripts() {
+	const reportCoverage =
+		hasFile('coverage') && !parseEnv('SKIP_CODECOV', false);
+
+	if (!autorelease && !reportCoverage) {
+		console.log(
+			'No need to autorelease or report coverage. Skipping travis-after-success script...',
+		);
+	} else {
+		const result = spawn.sync(
+			resolveBin('concurrently'),
+			getConcurrentlyArgs(
+				{
+					codecov: reportCoverage
+						? `echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'`
+						: null,
+					release: autorelease
+						? `echo installing semantic-release && npx -p semantic-release@17 -c 'echo running semantic-release && semantic-release'`
+						: null,
+				},
+				{ killOthers: false },
+			),
+			{ stdio: 'inherit' },
+		);
+
+		process.exit(result.status);
+	}
+}

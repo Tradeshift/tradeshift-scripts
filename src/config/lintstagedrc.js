@@ -1,17 +1,14 @@
-const { resolveKcdScripts, resolveBin } = require('../utils');
+const { resolveKcdScripts, resolveBin, ifTypescript } = require('../utils');
 
 const kcdScripts = resolveKcdScripts();
 const doctoc = resolveBin('doctoc');
 
 module.exports = {
-	concurrent: false,
-	linters: {
-		'**/*.+(js|jsx|json|less|css|ts|tsx)': [
-			`${kcdScripts} format`,
-			`${kcdScripts} lint`,
-			`${kcdScripts} test --findRelatedTests`,
-			'git add'
-		],
-		'README.md': [`${doctoc} --maxlevel 2 --notitle`, 'git add']
-	}
+	'README.md': [`${doctoc} --maxlevel 3 --notitle`],
+	'*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx|vue)': [
+		`${kcdScripts} format`,
+		`${kcdScripts} lint`,
+		`${kcdScripts} test --findRelatedTests`,
+	],
+	'*.+(ts|tsx)': ifTypescript ? [`tsc --noEmit`] : undefined,
 };

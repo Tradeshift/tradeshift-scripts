@@ -1,0 +1,11 @@
+{
+	/* TSConfig added to enable the typescript toggle in specs */
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"strict": true,
+		/* This is the important one: */
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+	}
+}
