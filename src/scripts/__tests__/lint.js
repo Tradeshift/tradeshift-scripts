@@ -5,8 +5,8 @@ jest.mock('../../config/jest.config', () => ({ builtInConfig: true }));
 
 // this removes the quotes around strings...
 expect.addSnapshotSerializer({
-	print: val => val,
-	test: val => typeof val === 'string'
+	print: (val) => val,
+	test: (val) => typeof val === 'string',
 });
 
 cases(
@@ -16,7 +16,7 @@ cases(
 		utils = require('../../utils'),
 		hasPkgProp = () => false,
 		hasFile = () => false,
-		setup = () => () => {}
+		setup = () => () => {},
 	}) => {
 		// beforeEach
 		const { sync: crossSpawnSyncMock } = require('cross-spawn');
@@ -25,7 +25,7 @@ cases(
 		Object.assign(utils, {
 			hasPkgProp,
 			hasFile,
-			resolveBin: (modName, { executable = modName } = {}) => executable
+			resolveBin: (modName, { executable = modName } = {}) => executable,
 		});
 		process.exit = jest.fn();
 		const teardown = setup();
@@ -51,31 +51,36 @@ cases(
 	{
 		'calls eslint CLI with default args': {},
 		'does not use built-in config with --config': {
-			args: ['--config', './custom-config.js']
+			args: ['--config', './custom-config.js'],
 		},
 		'does not use built-in config with .eslintrc file': {
-			hasFile: filename => filename === '.eslintrc'
+			hasFile: (filename) => filename === '.eslintrc',
 		},
 		'does not use built-in config with .eslintrc.js file': {
-			hasFile: filename => filename === '.eslintrc.js'
+			hasFile: (filename) => filename === '.eslintrc.js',
 		},
 		'does not use built-in config with eslintConfig pkg prop': {
-			hasPkgProp: prop => prop === 'eslintConfig'
+			hasPkgProp: (prop) => prop === 'eslintConfig',
 		},
 		'does not use built-in ignore with --ignore-path': {
-			args: ['--ignore-path', './my-ignore']
+			args: ['--ignore-path', './my-ignore'],
 		},
 		'does not use built-in ignore with .eslintignore file': {
-			hasFile: filename => filename === '.eslintignore'
+			hasFile: (filename) => filename === '.eslintignore',
 		},
 		'does not use built-in ignore with eslintIgnore pkg prop': {
-			hasPkgProp: prop => prop === 'eslintIgnore'
+			hasPkgProp: (prop) => prop === 'eslintIgnore',
 		},
 		'--no-cache will disable caching': {
-			args: ['--no-cache']
+			args: ['--no-cache'],
 		},
 		'runs on given files, but only js files': {
-			args: ['./src/index.js', './package.json', './src/index.css', './src/component.js']
-		}
-	}
+			args: [
+				'./src/index.js',
+				'./package.json',
+				'./src/index.css',
+				'./src/component.js',
+			],
+		},
+	},
 );

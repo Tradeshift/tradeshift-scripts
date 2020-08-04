@@ -10,8 +10,8 @@ module.exports = {
 			`${kcdScripts} format`,
 			`${kcdScripts} lint`,
 			`${kcdScripts} test --findRelatedTests`,
-			'git add'
+			'git add',
 		],
-		'README.md': [`${doctoc} --maxlevel 2 --notitle`, 'git add']
-	}
+		'README.md': [`${doctoc} --maxlevel 2 --notitle`, 'git add'],
+	},
 };

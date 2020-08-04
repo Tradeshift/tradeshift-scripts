@@ -3,11 +3,13 @@ const resolve = require('resolve');
 const { hasPkgProp, hasFile } = require('../../utils');
 
 const useBuiltinConfig =
-	!hasFile('.lintstagedrc') && !hasFile('lint-staged.config.js') && !hasPkgProp('lint-staged');
+	!hasFile('.lintstagedrc') &&
+	!hasFile('lint-staged.config.js') &&
+	!hasPkgProp('lint-staged');
 
 const lintStagedPath = require.resolve('lint-staged');
 const cosmiconfigPath = resolve.sync('cosmiconfig', {
-	basedir: path.dirname(lintStagedPath)
+	basedir: path.dirname(lintStagedPath),
 });
 
 // lint-staged uses cosmiconfig to find its configuration
@@ -19,8 +21,10 @@ function fakeCosmiconfig(...args) {
 	if (args[0] === 'lint-staged') {
 		return {
 			search() {
-				return Promise.resolve({ config: require('../../config/lintstagedrc') });
-			}
+				return Promise.resolve({
+					config: require('../../config/lintstagedrc'),
+				});
+			},
 		};
 	} else {
 		return require(cosmiconfigPath)(...args);

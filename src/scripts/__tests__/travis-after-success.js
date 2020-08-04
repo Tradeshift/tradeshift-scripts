@@ -2,13 +2,17 @@ import cases from 'jest-in-case';
 
 // this removes the quotes around strings...
 expect.addSnapshotSerializer({
-	print: val => val,
-	test: val => typeof val === 'string'
+	print: (val) => val,
+	test: (val) => typeof val === 'string',
 });
 
 cases(
 	'travis-after-success',
-	({ version = '0.0.0-semantically-released', hasCoverageDir = true, branch = 'master' }) => {
+	({
+		version = '0.0.0-semantically-released',
+		hasCoverageDir = true,
+		branch = 'master',
+	}) => {
 		// beforeEach
 		const { sync: crossSpawnSyncMock } = require('cross-spawn');
 		const envCiMock = require('env-ci');
@@ -24,7 +28,7 @@ cases(
 		if (version) {
 			utils.pkg.version = version;
 		}
-		utils.hasFile = filename => filename === 'coverage' && hasCoverageDir;
+		utils.hasFile = (filename) => filename === 'coverage' && hasCoverageDir;
 		require('../travis-after-success');
 		expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1);
 		const [firstCall] = crossSpawnSyncMock.mock.calls;
@@ -38,13 +42,13 @@ cases(
 	{
 		'calls concurrently with both scripts': {},
 		'does not do the autorelease script when the version is different': {
-			version: '1.2.3'
+			version: '1.2.3',
 		},
 		'does not do the codecov script when there is no coverage directory': {
-			hasCoverageDir: false
+			hasCoverageDir: false,
 		},
 		'adds dry-run flag when not running on master': {
-			branch: 'dev-branch'
-		}
-	}
+			branch: 'dev-branch',
+		},
+	},
 );

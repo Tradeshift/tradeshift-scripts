@@ -5,8 +5,8 @@ jest.mock('../../config/jest.config', () => ({ builtInConfig: true }));
 
 // this removes the quotes around strings...
 expect.addSnapshotSerializer({
-	print: val => val,
-	test: val => typeof val === 'string'
+	print: (val) => val,
+	test: (val) => typeof val === 'string',
 });
 
 cases(
@@ -18,7 +18,7 @@ cases(
 		hasJestConfigFile = false,
 		setup = () => () => {},
 		ci = 'false',
-		precommit = 'false'
+		precommit = 'false',
 	}) => {
 		// beforeEach
 		const { run: jestRunMock } = require('jest');
@@ -29,7 +29,7 @@ cases(
 		process.env.SCRIPTS_PRECOMMIT = precommit;
 		Object.assign(utils, {
 			hasPkgProp: () => pkgHasJestProp,
-			hasFile: () => hasJestConfigFile
+			hasFile: () => hasJestConfigFile,
 		});
 		process.exit = jest.fn();
 		const teardown = setup();
@@ -56,31 +56,31 @@ cases(
 	{
 		'calls jest.run with default args': {},
 		'does not watch on CI': {
-			ci: 'true'
+			ci: 'true',
 		},
 		'does not watch on SCRIPTS_PRECOMMIT': {
-			precommit: 'true'
+			precommit: 'true',
 		},
 		'does not watch with --no-watch': {
-			args: ['--no-watch']
+			args: ['--no-watch'],
 		},
 		'does not watch with --coverage': {
-			args: ['--coverage']
+			args: ['--coverage'],
 		},
 		'does not watch --updateSnapshot': {
-			args: ['--updateSnapshot']
+			args: ['--updateSnapshot'],
 		},
 		'uses custom config with --config': {
-			args: ['--config', './my-config.js']
+			args: ['--config', './my-config.js'],
 		},
 		'uses custom config with jest prop in pkg': {
-			pkgHasJestProp: true
+			pkgHasJestProp: true,
 		},
 		'uses custom config with jest.config.js file': {
-			hasJestConfigFile: true
+			hasJestConfigFile: true,
 		},
 		'forwards args': {
-			args: ['--coverage', '--watch']
-		}
-	}
+			args: ['--coverage', '--watch'],
+		},
+	},
 );

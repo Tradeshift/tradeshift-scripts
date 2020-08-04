@@ -10,12 +10,18 @@ expect.addSnapshotSerializer({
 	},
 	test(val) {
 		return typeof val === 'string';
-	}
+	},
 });
 
 cases(
 	'format',
-	({ snapshotLog = false, throws = false, setup = () => () => {}, signal = false, args = [] }) => {
+	({
+		snapshotLog = false,
+		throws = false,
+		setup = () => () => {},
+		signal = false,
+		args = [],
+	}) => {
 		// beforeEach
 		const { sync: crossSpawnSyncMock } = require('cross-spawn');
 		const originalExit = process.exit;
@@ -62,28 +68,28 @@ cases(
 	},
 	{
 		'calls node with the script path and args': {
-			args: ['test', '--no-watch']
+			args: ['test', '--no-watch'],
 		},
 		'throws unknown script': {
 			args: ['unknown-script'],
-			throws: true
+			throws: true,
 		},
 		'logs help with no args': {
-			snapshotLog: true
+			snapshotLog: true,
 		},
 		'logs for SIGKILL signal': {
 			args: ['lint'],
-			signal: 'SIGKILL'
+			signal: 'SIGKILL',
 		},
 		'logs for SIGTERM signal': {
 			args: ['build'],
-			signal: 'SIGTERM'
+			signal: 'SIGTERM',
 		},
 		'does not log for other signals': {
 			args: ['test'],
-			signal: 'SIGBREAK'
-		}
-	}
+			signal: 'SIGBREAK',
+		},
+	},
 );
 
 /* eslint complexity:0 */

@@ -2,8 +2,8 @@ import cases from 'jest-in-case';
 
 // this removes the quotes around strings...
 expect.addSnapshotSerializer({
-	print: val => val,
-	test: val => typeof val === 'string'
+	print: (val) => val,
+	test: (val) => typeof val === 'string',
 });
 
 cases(
@@ -34,22 +34,22 @@ cases(
 	},
 	{
 		'calls concurrently with all scripts': {
-			setup: withDefaultSetup(setupWithScripts())
+			setup: withDefaultSetup(setupWithScripts()),
 		},
 		'does not include "lint" if it doesn\'t have that script': {
-			setup: withDefaultSetup(setupWithScripts(['test', 'build', 'flow']))
+			setup: withDefaultSetup(setupWithScripts(['test', 'build', 'flow'])),
 		},
 		'does not include "test" if it doesn\'t have that script': {
-			setup: withDefaultSetup(setupWithScripts(['lint', 'build', 'flow']))
+			setup: withDefaultSetup(setupWithScripts(['lint', 'build', 'flow'])),
 		},
 		'does not include "build" if it doesn\'t have that script': {
-			setup: withDefaultSetup(setupWithScripts(['test', 'lint', 'flow']))
+			setup: withDefaultSetup(setupWithScripts(['test', 'lint', 'flow'])),
 		},
 		'does not include "flow" if it doesn\'t have that script': {
-			setup: withDefaultSetup(setupWithScripts(['test', 'build', 'lint']))
+			setup: withDefaultSetup(setupWithScripts(['test', 'build', 'lint'])),
 		},
 		'allows you to specify your own npm scripts': {
-			setup: setupWithArgs(['specialbuild,specialtest,speciallint'])
+			setup: setupWithArgs(['specialbuild,specialtest,speciallint']),
 		},
 		"doesn't use test or lint if it's in precommit": {
 			setup: withDefaultSetup(() => {
@@ -58,9 +58,9 @@ cases(
 				return function teardown() {
 					process.env.SCRIPTS_PRECOMMIT = previousVal;
 				};
-			})
-		}
-	}
+			}),
+		},
+	},
 );
 
 function setupWithScripts(scripts = ['test', 'lint', 'build', 'flow']) {

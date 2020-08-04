@@ -1,5 +1,5 @@
 jest.mock('read-pkg-up', () => ({
-	sync: jest.fn(() => ({ pkg: {}, path: '/blah/package.json' }))
+	sync: jest.fn(() => ({ pkg: {}, path: '/blah/package.json' })),
 }));
 jest.mock('which', () => ({ sync: jest.fn(() => {}) }));
 
@@ -26,7 +26,7 @@ test('appDirectory is the dirname to the package.json', () => {
 test('resolveKcdScripts resolves to src/index.js when in the tradeshift-scripts package', () => {
 	mockPkg({ pkg: { name: 'tradeshift-scripts' } });
 	expect(require('../utils').resolveKcdScripts()).toBe(
-		require.resolve('../').replace(process.cwd(), '.')
+		require.resolve('../').replace(process.cwd(), '.'),
 	);
 });
 
@@ -38,13 +38,13 @@ test('resolveKcdScripts resolves to tradeshift-scripts if not in the tradeshift-
 
 test("resolveBin resolves to the full path when it's not in $PATH", () => {
 	expect(require('../utils').resolveBin('cross-env')).toBe(
-		require.resolve('cross-env/src/bin/cross-env').replace(process.cwd(), '.')
+		require.resolve('cross-env/src/bin/cross-env').replace(process.cwd(), '.'),
 	);
 });
 
 test("resolveBin resolves to the binary if it's in $PATH", () => {
 	whichSyncMock.mockImplementationOnce(() =>
-		require.resolve('cross-env/src/bin/cross-env').replace(process.cwd(), '.')
+		require.resolve('cross-env/src/bin/cross-env').replace(process.cwd(), '.'),
 	);
 	expect(require('../utils').resolveBin('cross-env')).toBe('cross-env');
 	expect(whichSyncMock).toHaveBeenCalledTimes(1);
@@ -67,8 +67,8 @@ test('getConcurrentlyArgs gives good args to pass to concurrently', () => {
 			g: 'echo g',
 			h: 'echo h',
 			i: 'echo i',
-			j: 'echo j'
-		})
+			j: 'echo j',
+		}),
 	).toMatchSnapshot();
 });
 
@@ -81,7 +81,9 @@ test('parseEnv parses the existing environment variable', () => {
 
 test("parseEnv returns the default if the environment variable doesn't exist", () => {
 	const defaultVal = { hello: 'world' };
-	expect(require('../utils').parseEnv('DOES_NOT_EXIST', defaultVal)).toBe(defaultVal);
+	expect(require('../utils').parseEnv('DOES_NOT_EXIST', defaultVal)).toBe(
+		defaultVal,
+	);
 });
 
 test('ifAnyDep returns the true argument if true and false argument if false', () => {
