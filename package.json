@@ -87,7 +87,7 @@
 		"rollup-watch": "^4.3.1",
 		"semver": "^6.3.0",
 		"which": "^2.0.1",
-		"yargs-parser": "^10.1.0"
+		"yargs-parser": "^20.2.0"
 	},
 	"eslintIgnored": [
 		"node_modules",
