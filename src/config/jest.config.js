@@ -7,7 +7,7 @@ const useBuiltInBabelConfig = !hasFile('.babelrc') && !hasPkgProp('babel');
 const junitConfig = hasPkgProp('jest-junit')
 	? {}
 	: {
-			output: fromRoot('build/junit/results.xml'),
+			outputDirectory: fromRoot('build/junit'),
 	  };
 
 const ignores = [
