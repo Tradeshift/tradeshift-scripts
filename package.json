@@ -70,7 +70,7 @@
 		"lodash.camelcase": "^4.3.0",
 		"lodash.has": "^4.5.2",
 		"lodash.merge": "^4.6.2",
-		"mkdirp": "^0.5.1",
+		"mkdirp": "^1.0.4",
 		"npmlog": "^4.1.2",
 		"prettier": "^2.0.5",
 		"read-pkg-up": "^7.0.0",
