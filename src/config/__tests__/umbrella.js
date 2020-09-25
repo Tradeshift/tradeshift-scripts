@@ -5,6 +5,4 @@ test('requiring some files does not blow up', () => {
 	require('../jest.config');
 	require('../lintstagedrc');
 	require('../prettierrc');
-	require('../rollup.config');
-	require('../').getRollupConfig();
 });
