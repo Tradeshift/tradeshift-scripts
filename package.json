@@ -22,7 +22,8 @@
 		"babel.js",
 		"eslint.js",
 		"config.js",
-		"prettier.js"
+		"prettier.js",
+		"husky.js"
 	],
 	"keywords": [],
 	"author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
