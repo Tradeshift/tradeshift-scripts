@@ -1,0 +1,15 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tradeshift-scripts
+  description: Abstract away all configuration for for linting, testing, building, and more.
+  annotations:
+    github.com/project-slug: tradeshift/tradeshift-scripts
+  tags:
+    - npm
+    - build
+spec:
+  type: library
+  lifecycle: production
+  owner: group:app-enablement
