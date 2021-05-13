@@ -54,7 +54,7 @@
 		"concurrently": "^5.0.0",
 		"cross-env": "^7.0.2",
 		"cross-spawn": "^7.0.1",
-		"doctoc": "^1.4.0",
+		"doctoc": "^2.0.0",
 		"env-ci": "^5.0.2",
 		"eslint": "^7.9.0",
 		"eslint-config-tradeshift": "^7.0.0",
