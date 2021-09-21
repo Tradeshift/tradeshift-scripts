@@ -12,4 +12,4 @@ metadata:
 spec:
   type: library
   lifecycle: production
-  owner: partner-enablement-and-apps
+  owner: developer-productivity
