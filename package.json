@@ -95,10 +95,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/wejendorp/tradeshift-scripts.git"
+		"url": "https://github.com/tradeshift/tradeshift-scripts.git"
 	},
 	"bugs": {
-		"url": "https://github.com/wejendorp/tradeshift-scripts/issues"
+		"url": "https://github.com/tradeshift/tradeshift-scripts/issues"
 	},
-	"homepage": "https://github.com/wejendorp/tradeshift-scripts#readme"
+	"homepage": "https://github.com/tradeshift/tradeshift-scripts#readme"
 }
