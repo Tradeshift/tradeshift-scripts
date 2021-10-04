@@ -10,14 +10,14 @@
 [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npmcharts]
-[![MIT License][license-badge]][LICENSE]
+[![MIT License][license-badge]][license]
 
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
 ## The problem
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/wejendorp/tradeshift-scripts.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/tradeshift/tradeshift-scripts.svg)](https://greenkeeper.io/)
 
 Creating new tradeshift npm libraries requires a lot of boilerplate configuration,
 and is prone to errors. Configurations will often diverge or never be updated.
@@ -28,9 +28,9 @@ This is a CLI that abstracts away all configuration for open source projects
 for linting, testing, building, and more.
 
 ## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -71,25 +71,26 @@ a `CODECOV_TOKEN`.
 
 ```json
 {
-  "name": "awesome-library",
-  "version": "0.0.0-semantically-released",
-  "main": "dist/index.js",
-  "files": ["dist"],
-  "scripts": {
-    "test": "tradeshift-scripts test",
-    "test:update": "tradeshift-scripts test --updateSnapshot",
-    "build": "tradeshift-scripts build",
-    "lint": "tradeshift-scripts lint",
-    "format": "tradeshift-scripts format",
-    "validate": "tradeshift-scripts validate",
-    "precommit": "tradeshift-scripts precommit",
-    "after-success": "tradeshift-scripts travis-after-success"
-  },
-  "devDependencies": {
-    "tradeshift-scripts": "1.1.0"
-  }
+	"name": "awesome-library",
+	"version": "0.0.0-semantically-released",
+	"main": "dist/index.js",
+	"files": ["dist"],
+	"scripts": {
+		"test": "tradeshift-scripts test",
+		"test:update": "tradeshift-scripts test --updateSnapshot",
+		"build": "tradeshift-scripts build",
+		"lint": "tradeshift-scripts lint",
+		"format": "tradeshift-scripts format",
+		"validate": "tradeshift-scripts validate",
+		"precommit": "tradeshift-scripts precommit",
+		"after-success": "tradeshift-scripts travis-after-success"
+	},
+	"devDependencies": {
+		"tradeshift-scripts": "1.1.0"
+	}
 }
 ```
+
 </details>
 
 <details>
@@ -112,6 +113,7 @@ branches:
   only:
     - master
 ```
+
 </details>
 
 ### Overriding Config
@@ -124,7 +126,7 @@ want to have your own config for something, just add the configuration and
 `tradeshift-scripts` exposes its configuration so you can use it and override only
 the parts of the config you need to.
 
-This can be a very helpful way to make *editor integration* work for tools like
+This can be a very helpful way to make _editor integration_ work for tools like
 ESLint which require project-based ESLint configuration to be present to work.
 
 So, if we were to do this for ESLint, you could create an `.eslintrc` with the
@@ -143,10 +145,10 @@ Or, for `babel`, a `.babelrc` with:
 Or, for `jest`:
 
 ```javascript
-const {jest: jestConfig} = require('tradeshift-scripts/config')
+const { jest: jestConfig } = require('tradeshift-scripts/config');
 module.exports = Object.assign(jestConfig, {
-  // your overrides here
-})
+	// your overrides here
+});
 ```
 
 > Note: `tradeshift-scripts` intentionally does not merge things for you when you start
@@ -167,23 +169,23 @@ MIT
 
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
-[build-badge]: https://img.shields.io/travis/wejendorp/tradeshift-scripts.svg?style=flat-square
-[build]: https://travis-ci.org/wejendorp/tradeshift-scripts
-[coverage-badge]: https://img.shields.io/codecov/c/github/wejendorp/tradeshift-scripts.svg?style=flat-square
-[coverage]: https://codecov.io/github/wejendorp/tradeshift-scripts
+[build-badge]: https://img.shields.io/travis/tradeshift/tradeshift-scripts.svg?style=flat-square
+[build]: https://travis-ci.org/tradeshift/tradeshift-scripts
+[coverage-badge]: https://img.shields.io/codecov/c/github/tradeshift/tradeshift-scripts.svg?style=flat-square
+[coverage]: https://codecov.io/github/tradeshift/tradeshift-scripts
 [version-badge]: https://img.shields.io/npm/v/tradeshift-scripts.svg?style=flat-square
 [package]: https://www.npmjs.com/package/tradeshift-scripts
 [downloads-badge]: https://img.shields.io/npm/dm/tradeshift-scripts.svg?style=flat-square
 [npmcharts]: http://npmcharts.com/compare/tradeshift-scripts
 [license-badge]: https://img.shields.io/npm/l/tradeshift-scripts.svg?style=flat-square
-[license]: https://github.com/wejendorp/tradeshift-scripts/blob/master/LICENSE
+[license]: https://github.com/tradeshift/tradeshift-scripts/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/wejendorp/tradeshift-scripts/blob/master/other/CODE_OF_CONDUCT.md
-[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20tradeshift-scripts!%20https://github.com/wejendorp/tradeshift-scripts%20%F0%9F%91%8D
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/wejendorp/tradeshift-scripts.svg?style=social
+[coc]: https://github.com/tradeshift/tradeshift-scripts/blob/master/other/CODE_OF_CONDUCT.md
+[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20tradeshift-scripts!%20https://github.com/tradeshift/tradeshift-scripts%20%F0%9F%91%8D
+[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/tradeshift/tradeshift-scripts.svg?style=social
 [kcd]: https://github.com/kentcdodds/kcd-scripts
 [semantic-release]: https://github.com/semantic-release/semantic-release
 [codecov]: https://codecov.io
