@@ -1,0 +1,68 @@
+name: Test & release
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  validate:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: 📥 Download deps
+        run: npm install
+
+      - name: ▶️ Run validate script
+        run: npm run validate
+
+      - name: Publish Test Report
+        uses: tradeshift/action-junit-report@v1
+        if: ${{ always() }}
+        with:
+          check_name: Unit tests
+          report_paths: 'build/junit**/*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  release:
+    name: 🚀 Release
+    needs: [validate]
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.fork &&
+      contains('refs/heads/master,refs/heads/beta,refs/heads/next,refs/heads/alpha',
+      github.ref) && github.event_name == 'push' }}
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: 📥 Download deps
+        run: npm install
+
+      - name: 🏗 Run build script
+        run: npm run --if-present build
+
+      - name: 🚀 Release
+        uses: tradeshift/actions-semantic-release@v1
+        id: semantic-release
+        with:
+          branches: |
+            [
+              'master'
+            ]
+          npm_publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
