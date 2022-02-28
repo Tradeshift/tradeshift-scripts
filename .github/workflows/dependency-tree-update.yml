@@ -12,4 +12,3 @@ jobs:
       npm-token: ${{ secrets.NPM_READ_TOKEN }}
     with:
       path: .
-      runs-on: self-hosted
