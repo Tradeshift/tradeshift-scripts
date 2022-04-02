@@ -26,7 +26,7 @@ jobs:
         run: npm run validate
 
       - name: Publish Test Report
-        uses: tradeshift/action-junit-report@v1
+        uses: tradeshift/actions-junit-report@v1
         if: ${{ always() }}
         with:
           check_name: Unit tests
@@ -58,10 +58,6 @@ jobs:
         uses: tradeshift/actions-semantic-release@v1
         id: semantic-release
         with:
-          branches: |
-            [
-              'master'
-            ]
           npm_publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

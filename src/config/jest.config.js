@@ -20,10 +20,11 @@ const ignores = [
 const jestConfig = {
 	roots: [fromRoot('src')],
 	testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
-	collectCoverageFrom: ['src/**/*.[jt]s?(x)'],
 	testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)spec.[jt]s?(x)'],
 	testPathIgnorePatterns: [...ignores],
+	collectCoverageFrom: ['src/**/*.[jt]s?(x)'],
 	coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.[jt]s$'],
+	coverageReporters: ['text', 'cobertura', 'lcov', 'json'],
 	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
 	reporters: ['default', [require.resolve('jest-junit'), junitConfig]],
 	coverageThreshold: {
