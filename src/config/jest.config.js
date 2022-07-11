@@ -38,7 +38,7 @@ const jestConfig = {
 };
 
 if (useBuiltInBabelConfig) {
-	jestConfig.transform = { '^.+\\.[jt]s$': here('./babel-transform') };
+	jestConfig.transform = { '^.+\\.[jt]sx?$': here('./babel-transform') };
 }
 
 module.exports = jestConfig;
