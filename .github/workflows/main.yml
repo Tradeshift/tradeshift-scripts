@@ -8,7 +8,7 @@ on:
 jobs:
   validate:
     name: Build and test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 10
     steps:
       - name: ⬇️ Checkout repo
@@ -35,7 +35,7 @@ jobs:
   release:
     name: 🚀 Release
     needs: [validate]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ !github.event.fork &&
       contains('refs/heads/master,refs/heads/beta,refs/heads/next,refs/heads/alpha',
       github.ref) && github.event_name == 'push' }}
