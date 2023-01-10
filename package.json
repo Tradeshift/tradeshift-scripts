@@ -46,7 +46,7 @@
 		"babel-plugin-dynamic-import-node": "^2.3.3",
 		"babel-plugin-macros": "^3.1.0",
 		"babel-plugin-minify-dead-code-elimination": "^0.5.1",
-		"babel-plugin-module-resolver": "^4.1.0",
+		"babel-plugin-module-resolver": "^5.0.0",
 		"babel-plugin-transform-inline-environment-variables": "^0.4.3",
 		"babel-plugin-transform-react-remove-prop-types": "^0.4.24",
 		"browserslist": "^4.16.6",
