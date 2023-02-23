@@ -70,7 +70,7 @@
 		"prettier": "^2.0.5",
 		"read-pkg-up": "^7.0.0",
 		"resolve": "^1.12.0",
-		"rimraf": "^3.0.0",
+		"rimraf": "^4.0.0",
 		"semver": "^7.3.2",
 		"which": "^3.0.0",
 		"yargs-parser": "^21.0.0"
