@@ -1,12 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>Tradeshift/renovate-config:config-js-lib"
-  ],
-  "packageRules": [
-		{
-			"matchDepTypes": ["devDependencies"],
-			"automerge": true
-		}
-	]
+    "local>Tradeshift/renovate-config:automerge-all"
+  ]
 }
