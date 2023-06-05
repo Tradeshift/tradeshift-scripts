@@ -89,6 +89,9 @@
 		"extends": "./src/config/eslintrc",
 		"rules": {
 			"jest/no-jest-import": 0
+		},
+		"env": {
+			"jest": true
 		}
 	},
 	"prettier": "./src/config/prettierrc",
