@@ -73,7 +73,7 @@
 		"rimraf": "^4.0.0",
 		"semver": "^7.5.4",
 		"which": "^3.0.1",
-		"yargs-parser": "^21.0.0"
+		"yargs-parser": "^21.1.1"
 	},
 	"devDependencies": {
 		"doctoc": "2.2.1",
