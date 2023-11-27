@@ -25,11 +25,11 @@ const jestConfig = {
 	collectCoverageFrom: ['src/**/*.[jt]s?(x)'],
 	coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.[jt]s$'],
 	coverageReporters: ['text', 'cobertura', 'lcov', 'json'],
-	transformIgnorePatterns: [
-		'[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
-		'node_modules/(?!axios)/', // transpile axios because it has es6 modules post v1
-		// https://github.com/axios/axios/issues/5101#issuecomment-1275242123
-	],
+	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\]'],
+	moduleNameMapper: {
+		// https://github.com/axios/axios/issues/5101
+		axios: 'axios/dist/node/axios.cjs',
+	},
 	reporters: ['default', [require.resolve('jest-junit'), junitConfig]],
 	coverageThreshold: {
 		global: {
