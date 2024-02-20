@@ -28,7 +28,7 @@ const jestConfig = {
 	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\]'],
 	moduleNameMapper: {
 		// https://github.com/axios/axios/issues/5101
-		axios: 'axios/dist/node/axios.cjs',
+		'/axios/': 'axios/dist/node/axios.cjs',
 	},
 	reporters: ['default', [require.resolve('jest-junit'), junitConfig]],
 	coverageThreshold: {
