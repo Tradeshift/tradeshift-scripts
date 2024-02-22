@@ -8,7 +8,7 @@ const junitConfig = hasPkgProp('jest-junit')
 	? {}
 	: {
 			outputDirectory: fromRoot('build/junit'),
-	  };
+		};
 
 const ignores = [
 	'/node_modules/',
@@ -25,11 +25,10 @@ const jestConfig = {
 	collectCoverageFrom: ['src/**/*.[jt]s?(x)'],
 	coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.[jt]s$'],
 	coverageReporters: ['text', 'cobertura', 'lcov', 'json'],
-	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\]'],
-	moduleNameMapper: {
-		// https://github.com/axios/axios/issues/5101
-		axios: 'axios/dist/node/axios.cjs',
-	},
+	transformIgnorePatterns: [
+		'[/\\\\]node_modules[/\\\\]',
+		'node_modules/(?!@tradeshift/tradeshift-mui)',
+	],
 	reporters: ['default', [require.resolve('jest-junit'), junitConfig]],
 	coverageThreshold: {
 		global: {
