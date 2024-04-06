@@ -54,7 +54,7 @@
 		"cross-env": "^7.0.3",
 		"cross-spawn": "^7.0.3",
 		"env-ci": "^11.0.0",
-		"eslint": "^8.57.0",
+		"eslint": "^9.0.0",
 		"eslint-config-tradeshift": "^9.0.1",
 		"eslint-plugin-react": "^7.34.1",
 		"execa": "^8.0.1",
