@@ -28,6 +28,7 @@ const jestConfig = {
 	transformIgnorePatterns: [
 		'[/\\\\]node_modules[/\\\\]',
 		'node_modules/(?!@tradeshift/tradeshift-mui)',
+                'node_modules/(?!uuid)'
 	],
 	reporters: ['default', [require.resolve('jest-junit'), junitConfig]],
 	coverageThreshold: {
