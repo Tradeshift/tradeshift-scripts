@@ -3,7 +3,7 @@ name: Test & release
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [master, t]
 
 jobs:
   validate:
@@ -32,6 +32,22 @@ jobs:
           check_name: Unit tests
           report_paths: 'build/junit**/*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🏗 Run build script
+        run: npm run --if-present build
+
+      - name: 🚀 Release
+        uses: tradeshift/actions-semantic-release@v2
+        id: semantic-release
+        with:
+          #npm_publish: true
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
+      - name: cat
+        run: |
+          find /tmp -type f -name ".npmrc" 2>/dev/null | xargs cat
   release:
     name: 🚀 Release
     needs: [validate]
@@ -62,3 +78,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
+      - name: cat
+        run: |
+          find /tmp -type f -name ".npmrc" 2>/dev/null | xargs cat
