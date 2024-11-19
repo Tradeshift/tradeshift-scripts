@@ -26,7 +26,7 @@ jobs:
         run: npm run validate
 
       - name: Publish Test Report
-        uses: tradeshift/actions-junit-report@v4
+        uses: tradeshift/actions-junit-report@v5
         if: ${{ always() }}
         with:
           check_name: Unit tests
