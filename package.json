@@ -3,7 +3,7 @@
 	"version": "0.0.0-semantically-released",
 	"description": "CLI for common scripts for my projects",
 	"engines": {
-		"node": ">=22.14.0"
+		"node": ">=22.15.0"
 	},
 	"bin": {
 		"tradeshift-scripts": "dist/index.js"
