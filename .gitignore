@@ -8,4 +8,5 @@ dist
 .DS_Store
 .eslintcache
 .idea
+.husky
 
