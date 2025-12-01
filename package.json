@@ -3,7 +3,7 @@
 	"version": "0.0.0-semantically-released",
 	"description": "CLI for common scripts for my projects",
 	"engines": {
-		"node": ">=24.11.0"
+		"node": ">=24.11.1"
 	},
 	"bin": {
 		"tradeshift-scripts": "dist/index.js"
@@ -57,7 +57,7 @@
 		"eslint": "^8.57.1",
 		"eslint-config-tradeshift": "^9.0.1",
 		"eslint-plugin-react": "^7.37.5",
-		"execa": "^9.6.0",
+		"execa": "^9.6.1",
 		"glob": "^8.1.0",
 		"husky": "^9.1.7",
 		"jest": "^30.0.5",
