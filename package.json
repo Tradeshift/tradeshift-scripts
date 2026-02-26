@@ -76,7 +76,7 @@
 		"yargs-parser": "^21.1.1"
 	},
 	"devDependencies": {
-		"doctoc": "2.2.1",
+		"doctoc": "2.3.0",
 		"jest-in-case": "1.0.2",
 		"typescript": "5.7.3"
 	},
