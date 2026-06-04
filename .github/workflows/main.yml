@@ -20,7 +20,7 @@ jobs:
           node-version-file: .nvmrc
 
       - name: 📥 Download deps
-        run: npm install
+        run: npm install --ignore-scripts
 
       - name: ▶️ Run validate script
         run: npm run validate
@@ -49,7 +49,7 @@ jobs:
           node-version-file: .nvmrc
 
       - name: 📥 Download deps
-        run: npm install
+        run: npm install --ignore-scripts
 
       - name: 🏗 Run build script
         run: npm run --if-present build
