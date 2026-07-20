@@ -15,7 +15,8 @@
 		"lint": "node src lint",
 		"format": "node src format",
 		"validate": "node src validate",
-		"precommit": "node src precommit"
+		"precommit": "node src precommit",
+		"prepare": "husky install"
 	},
 	"files": [
 		"dist",
