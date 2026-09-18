@@ -7,7 +7,7 @@ module.exports = {
 	'**/*.+(js|jsx|json|less|css|ts|tsx)': [
 		`${kcdScripts} format`,
 		`${kcdScripts} lint`,
-		`${kcdScripts} test --findRelatedTests`,
+		`${kcdScripts} test --findRelatedTests --passWithNoTests`,
 	],
 	'README.md': doctoc ? [`${doctoc} --maxlevel 2 --notitle`] : [],
 };
